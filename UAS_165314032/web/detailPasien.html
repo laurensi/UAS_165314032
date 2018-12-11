@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+        <!-- Navbar -->
+     
+
+        <div class="container-fluid bg-1">
+            <h3 class="margin">Cari Pasien</h3>
+            <!--            <form onsubmit="return make_json(this);" method="POST">-->
+            <div class="form-group">
+                <label for="nama">NIK :</label>
+                <input type="nama" class="form-control" id="nik" placeholder="Masukkan Nama Anda">
+                <button type="button" onclick="loadDoc()" id="btn">OK</button>
+                <div id="demo" style="margin-left: 5%"></div>
+           
+            <script>
+                function loadDoc() {
+                    var xmlhttp = new XMLHttpRequest();
+                    //http://206.189.38.188:8080/myrs/webresources/pasien/cariPasien?nik=33101
+                    var url = "http://206.189.38.188:8080/myrs/webresources/pasien/cariPasien?nik=" + nik.value;
+                    xmlhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            myFunction(this.responseText);
+                        }
+                    }
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.send();
+                    function myFunction(response) {
+                        var arr = JSON.parse(response);
+                        var i;
+                        var out = "<table align='center' style='width:50%;' border='2'><tr><td>NIK</td>\n\
+            <td>Nama</td><td>alamat</td><td>Tanggal Lahir</td>";
+                        for (i = 0; i < arr.length; i++) {
+                            out += "<tr><td>" +
+                                    arr[i].noRM +
+                                    "</td><td>" +
+                                    arr[i].nama +
+                                    "</td><td>" +
+                                    arr[i].alamat +
+                                    "</td><tr>"
+                            arr[i].nik +
+                                    "</td><tr>"
+                            arr[i].tanggalLahir +
+                                    "</td><tr>"
+                            arr[i].kelamin +
+                                    "</td><tr>"
+                        }
+                        out += "</table>";
+                        document.getElementById("demo").innerHTML = out;
+                    }
+                }
+            </script>
+</body>
+        </html>
